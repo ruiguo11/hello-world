@@ -7,27 +7,16 @@ orbs:
 # Orchestrate or schedule a set of jobs
   node: circleci/node@1.1
 jobs:
-  one: # This is our first job.
-    docker: # it uses the docker executor
+  print_hello:
+    docker:
       - image: circleci/node:13.8.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    # Steps are a list of commands to run inside the docker container above.
     steps:
-      - checkout # this pulls code down from GitHub
-      - run: echo "hello" # This prints "A first hello" to stdout.
-      - run: sleep 25 # a command telling the job to "sleep" for 25 seconds.
-  two: # This is our second job.
-    docker: # it runs inside a docker image, the same as above.
+      - run: echo hello
+  print_world:
+    docker:
       - image: circleci/node:13.8.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout
-      - run: echo "world" # We run a similar echo command to above.
-      - run: sleep 15 # and then sleep for 15 seconds.
+      - run: echo world
 workflows:
   # Name the workflow "welcome"
   welcome:
